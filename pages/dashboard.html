@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Main Page</title>
+    <link href="/styles/style.css" rel="stylesheet" />
+    <link href="/styles/dashboard.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>Employee Tracker</h1>
+      <div id="topnav">
+        <a href="">Edit Details</a>
+        <a href="">Change Password</a>
+        <a href="">Delete My Account</a>
+        <a href="">Logout</a>
+      </div>
+    </header>
+    <div class="hero_partition">
+      <div class="hero">
+        <div class="employee_details">
+          <div class="employee_fields">
+            <p>Name:</p>
+            <p id="name">Kajal</p>
+          </div>
+          <div class="employee_fields">
+            <p>Employee Id:</p>
+            <p id="id">769</p>
+          </div>
+          <div class="employee_fields">
+            <p>Position:</p>
+            <p id="position">Engineer</p>
+          </div>
+        </div>
+        <div class="avg_details">
+          <div class="avg_fields">
+            <p>Average Hours Spend(month):</p>
+            <p id="avg_month">6.7</p>
+          </div>
+          <div class="avg_fields">
+            <p>Average Hours Spend(6 months):</p>
+            <p id="avg_6month">7.1</p>
+          </div>
+        </div>
+      </div>
+      <div class="clock_div">
+        <div class="date_picker">
+          <input id="date" type="date" />
+        </div>
+        <div class="time_picker">
+          <div>
+            <input type="time" />
+            <button>Clock In</button>
+          </div>
+          <div>
+            <input type="time" />
+            <button>Clock Out</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

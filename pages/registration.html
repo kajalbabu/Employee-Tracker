@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Tracker Registration</title>
+    <link href="/styles/style.css" rel="stylesheet"/>
+  </head>
+  <body>
+    <div id="reg_body">
+      <h1>Registration Form</h1>
+      <form id="user_form" action="../index.html">
+        <div id="reg_form">
+          <div class="input_details">
+            <label for="name">Name:</label>
+            <input
+              id="user_name"
+              type="text"
+              name="name"
+              required
+              pattern="[A-Za-z ]{1,}$"
+              onkeypress="return allowOnlyLetters(event)"
+            />
+          </div>
+          <div class="input_details">
+            <label for="id">Id:</label>
+            <input
+              id="user_id"
+              type="text"
+              name="id"
+              pattern="[0-9]{1,}$"
+              onkeypress="return isNumberKey(event)"
+              required
+            />
+          </div>
+          <div class="input_details">
+            <label for="position">Position:</label>
+            <input
+              id="user_position"
+              type="text"
+              name="position"
+              required
+              pattern="^[A-Za-z0-9 -]{1,}$" 
+            />
+          </div>
+          <div class="input_details">
+            <label for="username">Username:</label>
+            <input
+              type="text"
+              name="username"
+              placeholder="Enter Username"
+              id="user"
+              pattern="[A-Za-z]{1,}$"
+              onkeypress="return allowOnlyLetters(event)"
+              required
+            />
+          </div>
+          <div class="input_details">
+            <label for="password">Password:</label>
+            <input
+              type="password"
+              id="pass"
+              name="password"
+              placeholder="Enter Password"
+              required
+            />
+          </div>
+          <div class="input_details">
+            <label for="password">Confirm Password:</label>
+            <input
+              type="password"
+              id="pass"
+              name="password"
+              placeholder="Enter Password"
+              required
+            />
+          </div>
+          <div id="login_button">
+            <input type="submit" id="register" name="submit" value="Submit" />
+            <input
+            id="user_reset"
+            type="reset"
+            value="Reset"
+            onclick="resetForm()"
+          />
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="/scripts/authantication.js"></script>
+</html>

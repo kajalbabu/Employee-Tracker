@@ -1,0 +1,49 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#login_body,#reg_body {
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  box-shadow: 1px 1px 10px black;
+  padding: 2% 3%;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  max-width: 95%;
+  overflow-x: auto;
+  background-color: rgb(245, 243, 243);
+}
+#login_form ,#reg_form{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#user_form {
+  width: 100%;
+}
+.input_details {
+  display: flex;
+  flex-direction: column;
+  padding-block: 3px;
+}
+#login_button,#reg_button {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-block: 10px;
+}
+#login_button input,
+#reg_button input {
+  width: 100%;
+  font-weight: bold;
+  background-color: rgb(175, 175, 170);
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  padding-block: 10px;
+}
+
