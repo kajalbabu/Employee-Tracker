@@ -9,8 +9,19 @@
   <body>
     <div id="reg_body">
       <h1>Registration Form</h1>
-      <form id="user_form" action="../index.html">
+      <form id="user_form" action="../index.html" onsubmit="formSubmission()">
         <div id="reg_form">
+          <div class="input_details">
+            <label for="id"> Employee Id:</label>
+            <input
+              id="user_id"
+              type="text"
+              name="id"
+              pattern="[0-9]{1,}$"
+              required
+              readonly
+            />
+          </div>
           <div class="input_details">
             <label for="name">Name:</label>
             <input
@@ -22,26 +33,18 @@
               onkeypress="return allowOnlyLetters(event)"
             />
           </div>
-          <div class="input_details">
-            <label for="id">Id:</label>
-            <input
-              id="user_id"
-              type="text"
-              name="id"
-              pattern="[0-9]{1,}$"
-              onkeypress="return isNumberKey(event)"
-              required
-            />
-          </div>
+          
           <div class="input_details">
             <label for="position">Position:</label>
-            <input
-              id="user_position"
-              type="text"
-              name="position"
-              required
-              pattern="^[A-Za-z0-9 -]{1,}$" 
-            />
+            <select id="user_position">
+              <option></option>
+              <option>Software Engineer Level-1</option>
+              <option>Software Engineer Level-2</option>
+              <option>Project Manager</option>
+              <option>Senior Engineer</option>
+              <option>Project Team Lead</option>
+              <option>System Engineer</option>
+            </select>
           </div>
           <div class="input_details">
             <label for="username">Username:</label>
@@ -69,7 +72,7 @@
             <label for="password">Confirm Password:</label>
             <input
               type="password"
-              id="pass"
+              id="confirmpass"
               name="password"
               placeholder="Enter Password"
               required
@@ -88,5 +91,8 @@
       </form>
     </div>
   </body>
+  <script src="/scripts/validation.js"></script>
   <script src="/scripts/authantication.js"></script>
+  <!-- <script src="/scripts/dashboard.js"></script> -->
+  <!-- <script src="/scripts/login.js"></script> -->
 </html>

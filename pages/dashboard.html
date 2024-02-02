@@ -11,10 +11,10 @@
     <header>
       <h1>Employee Tracker</h1>
       <div id="topnav">
-        <a href="">Edit Details</a>
-        <a href="">Change Password</a>
-        <a href="">Delete My Account</a>
-        <a href="">Logout</a>
+        <a href="./registration.html">Edit Details</a>
+        <a href="./registration.html">Change Password</a>
+        <a href="../index.html">Delete My Account</a>
+        <a href="../index.html">Logout</a>
       </div>
     </header>
     <div class="hero_partition">
@@ -60,5 +60,38 @@
         </div>
       </div>
     </div>
+    <div id="table_content">
+      <h2>Employee Details</h2>
+    <div id="table_div">
+      <table id="my_table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Clock In</th>
+            <th>Clock Out</th>
+            <th>Total Hours</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="specific_div">
+    <h2>Clock IN - Clock OUT Details</h2>
+    <div id="specific_date">
+      <p>Date</p>
+    </div>
+    <div class="specific_table_div">
+      <table id="specific_table">
+        <tr>
+          <th>IN</th>
+        </tr>
+        <tr>
+          <th>OUT</th>
+        </tr>
+      </table>
+    </div>
+  </div>
   </body>
+  <script src="/scripts/dashboard.js"></script>
 </html>
