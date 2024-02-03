@@ -9,6 +9,8 @@ function handleForm(event) {
   const username = document.getElementById("user").value;
   const password = document.getElementById("pass").value;
   all_employees.map((user) => {
+    console.log(user.username)
+    console.log(username)
     if (username == user.username && btoa(password) == user.password) {
       loggedin = true;
       localStorage.setItem("log_employee", JSON.stringify(user));

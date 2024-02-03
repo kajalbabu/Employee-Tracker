@@ -13,7 +13,7 @@
       <div id="topnav">
         <a href="./registration.html">Edit Details</a>
         <a href="./registration.html">Change Password</a>
-        <a href="../index.html">Delete My Account</a>
+        <a href="" onclick="deleteAccount()">Delete My Account</a>
         <a href="../index.html">Logout</a>
       </div>
     </header>
@@ -22,76 +22,77 @@
         <div class="employee_details">
           <div class="employee_fields">
             <p>Name:</p>
-            <p id="name">Kajal</p>
+            <p id="name"></p>
           </div>
           <div class="employee_fields">
             <p>Employee Id:</p>
-            <p id="id">769</p>
+            <p id="id"></p>
           </div>
           <div class="employee_fields">
             <p>Position:</p>
-            <p id="position">Engineer</p>
+            <p id="position"></p>
           </div>
         </div>
         <div class="avg_details">
           <div class="avg_fields">
             <p>Average Hours Spend(month):</p>
-            <p id="avg_month">6.7</p>
+            <p id="avg_month"></p>
           </div>
           <div class="avg_fields">
             <p>Average Hours Spend(6 months):</p>
-            <p id="avg_6month">7.1</p>
+            <p id="avg_6month"></p>
           </div>
         </div>
       </div>
       <div class="clock_div">
         <div class="date_picker">
-          <input id="date" type="date" />
+          <input id="date" type="date" required/>
         </div>
         <div class="time_picker">
           <div>
-            <input type="time" />
-            <button>Clock In</button>
+            Log In
+            <input type="time" id="log_in" />
           </div>
           <div>
-            <input type="time" />
-            <button>Clock Out</button>
+            Log Out
+            <input type="time" id="log_out" />
           </div>
         </div>
+        <div id="submit_button"><button onclick="submitData()">Submit</button></div>
       </div>
     </div>
     <div id="table_content">
       <h2>Employee Details</h2>
-    <div id="table_div">
-      <table id="my_table">
-        <thead>
+      <div id="table_div">
+        <table id="my_table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Log In</th>
+              <th>Log Out</th>
+              <th>Total Hours</th>
+            </tr>
+          </thead>
+          <tbody id="table_body"></tbody>
+        </table>
+      </div>
+    </div>
+    <div class="specific_div">
+      <h2>Log IN - Log OUT Details</h2>
+      <div id="specific_date">
+        <p id="specific_date_display"></p>
+      </div>
+      <div class="specific_table_div">
+        <table id="specific_table">
           <tr>
-            <th>Date</th>
-            <th>Clock In</th>
-            <th>Clock Out</th>
-            <th>Total Hours</th>
+            <th>IN</th>
           </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
+          <tr>
+            <th>OUT</th>
+          </tr>
+        </table>
+      </div>
     </div>
-  </div>
-  <div class="specific_div">
-    <h2>Clock IN - Clock OUT Details</h2>
-    <div id="specific_date">
-      <p>Date</p>
-    </div>
-    <div class="specific_table_div">
-      <table id="specific_table">
-        <tr>
-          <th>IN</th>
-        </tr>
-        <tr>
-          <th>OUT</th>
-        </tr>
-      </table>
-    </div>
-  </div>
   </body>
   <script src="/scripts/dashboard.js"></script>
 </html>
