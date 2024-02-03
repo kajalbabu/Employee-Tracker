@@ -46,7 +46,7 @@
       </div>
       <div class="clock_div">
         <div class="date_picker">
-          <input id="date" type="date" required/>
+          <input id="date" type="date" required />
         </div>
         <div class="time_picker">
           <div>
@@ -58,7 +58,9 @@
             <input type="time" id="log_out" />
           </div>
         </div>
-        <div id="submit_button"><button onclick="submitData()">Submit</button></div>
+        <div id="submit_button">
+          <button onclick="submitData()">Submit</button>
+        </div>
       </div>
     </div>
     <div id="table_content">
@@ -84,10 +86,10 @@
       </div>
       <div class="specific_table_div">
         <table id="specific_table">
-          <tr>
+          <tr id="in_row">
             <th>IN</th>
           </tr>
-          <tr>
+          <tr id="out_row">
             <th>OUT</th>
           </tr>
         </table>

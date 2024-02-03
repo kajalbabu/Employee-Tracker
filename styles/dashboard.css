@@ -4,7 +4,7 @@ body {
   background-color: aliceblue;
   display: flex;
   flex-direction: column;
-  align-items:center;
+  align-items: center;
 }
 /* Header */
 header {
@@ -28,12 +28,12 @@ header h1 {
   text-decoration: none;
 }
 /* Hero Section */
-.hero_partition{
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 25px;
+.hero_partition {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 25px;
 }
 .hero {
   background-color: white;
@@ -54,36 +54,36 @@ header h1 {
   display: flex;
   gap: 10px;
 }
-.clock_div{
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    gap: 10px;
-    margin-right: 30px;
-    box-shadow: 1px 1px 10px rgb(163, 163, 163);
-    border-radius: 5px;
-    padding: 15px;
-    height: 100%;
-
+.clock_div {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  gap: 10px;
+  margin-right: 30px;
+  box-shadow: 1px 1px 10px rgb(163, 163, 163);
+  border-radius: 5px;
+  padding: 15px;
+  height: 100%;
 }
-.time_picker{
-    display: flex;
-    gap: 100px;
-
+.time_picker {
+  display: flex;
+  gap: 100px;
 }
-.time_picker div{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.time_picker div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-.time_picker button{
-    width: 150px;
-    padding-block: 5px;
+.time_picker button {
+  width: 150px;
+  padding-block: 5px;
 }
 
 /* Table section */
-table,td,th{
-  border-collapse:collapse ;
+table,
+td,
+th {
+  border-collapse: collapse;
   border: 1px solid black;
 }
 #table_div {
@@ -92,12 +92,12 @@ table,td,th{
   padding: 0;
   width: 100%;
 }
-#my_table{
+#my_table {
   width: 100%;
   padding: 0px;
   margin-top: 0px;
 }
-#table_content{
+#table_content {
   width: 90%;
   box-shadow: 1px 1px 10px rgb(163, 163, 163);
   margin-top: 20px;
@@ -109,17 +109,17 @@ table,td,th{
 }
 
 /* Specific Table Section */
-.specific_div{
+.specific_div {
   display: flex;
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  padding:10px;
+  padding: 10px;
   box-shadow: 1px 1px 10px rgb(163, 163, 163);
   width: 90%;
   margin-top: 20px;
   background-color: white;
 }
-#specific_table_div{
+#specific_table_div {
   width: 100%;
 }

@@ -15,82 +15,64 @@ document.getElementById("id").innerHTML = currentUser.id;
 document.getElementById("position").innerHTML = currentUser.position;
 const logs = currentUser.logs;
 console.log(currentUser);
+populateTable();
 
 function submitData() {
   const date = document.getElementById("date").value;
+  setDate(date);
   const tymObj = {};
   tymObj.login = document.getElementById("log_in").value;
   tymObj.logout = document.getElementById("log_out").value;
-  dateFound = false;
-  logs.map((item) => {
-    if (item.date == date) {
-      dateFound = true;
-      item.tymdata.push(tymObj);
+  if (validateTime(tymObj.login, tymObj.logout)) {
+    dateFound = false;
+    logs.map((item) => {
+      if (item.date == date) {
+        dateFound = true;
+        if (validateTime(item.lastLogout, tymObj.login)) {
+          item.tymdata.push(tymObj);
+          item.lastLogout = tymObj.logout;
+          item.duration = addTimes(
+            item.duration,
+            timeDiff(tymObj.login, tymObj.logout)
+          );
+          displayTable(item.tymdata);
+        } else {
+          alert("Your login should be after last logout");
+        }
+      }
+    });
+    if (!dateFound) {
+      const logObj = {};
+      logObj.date = date;
+      logObj.tymdata = [tymObj];
+      logObj.firstLogin = tymObj.login;
+      logObj.lastLogout = tymObj.logout;
+      logObj.duration = timeDiff(logObj.firstLogin, logObj.lastLogout);
+      logs.push(logObj);
+      displayTable(logObj.tymdata);
     }
-  });
-  if (!dateFound) {
-    const logObj = {};
-    logObj.date = date;
-    logObj.tymdata = [tymObj];
-    logs.push(logObj);
+    currentUser.logs = logs;
+    allEmployees[currentUserIndex] = currentUser;
+    localStorage.setItem("all_employees", JSON.stringify(allEmployees));
+    populateTable();
+  } else {
+    alert("Logout time should be  after login time");
   }
-  currentUser.logs = logs;
-  allEmployees[currentUserIndex] = currentUser;
-  localStorage.setItem("all_employees", JSON.stringify(allEmployees));
-  console.log(allEmployees);
-
-  // logObj.firstLogin=logObj.firstLogin?logObj.firstLogin:tymObj.login;
-  // logObj.lastLogout=logObj.lastLogout?tymObj.logout:logObj.lastLogout;
-  // var t= diff(tymObj.login,tymObj.logout);
-  // console.log(t)
-  // logObj.duration=logObj.duration+t;
 }
 
-// function submitData(){
-//     const master_obj={}
-//     const data_obj={}
-//     const tymObj={}
+function setDate(date) {
+  var options = {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  };
+  const dateObj = new Date(date);
+  document.getElementById("specific_date_display").innerHTML =
+    dateObj.toLocaleDateString("en-US", options);
+}
 
-//     master_obj.id=currentUser.id;
-//     master_obj.name=currentUser.name;
-//     master_obj.position=currentUser.position;
-//     master_obj.username=currentUser.username;
-//     master_obj.password=currentUser.password;
-
-//     document.getElementById("specific_date_display").innerHTML=document.getElementById("date").value;
-//     tymObj.login=document.getElementById("log_in").value;
-//     tymObj.logout=document.getElementById("log_out").value;
-//     tymdata.push(tymObj);
-//     d=false;
-
-//     data_obj.date=document.getElementById("date").value;
-//     var t= diff(tymObj.login,tymObj.logout);
-//     data_obj.duration=t;
-//     console.log(data_obj)
-//     data.map((user)=>{
-//         if(user.date==data_obj.date){
-//             d=true;
-//             user.tymdata.push(data_obj.tymdata);
-//         }
-//     })
-//     if(!d){
-//         data.push(data_obj);
-//     }
-
-//     data_obj.tymdata=tymdata;
-//     master_obj.data=data;
-//     console.log(master_obj);
-//     all_employees.map((user,index)=>{
-//         if(username==user.username){
-//             all_employees[index]=master_obj;
-//             // localStorage.setItem("all_employees", JSON.stringify(all_employees));
-//             console.log(all_employees);
-//         }
-//     })
-//     displayTable();
-//}
-
-function diff(start, end) {
+function timeDiff(start, end) {
   start = start.split(":");
   end = end.split(":");
   var startDate = new Date(0, 0, 0, start[0], start[1], 0);
@@ -106,39 +88,84 @@ function diff(start, end) {
   );
 }
 
-function displayTable() {
+function displayTable(data) {
   let table = document.getElementById("specific_table");
   table.innerHTML = "";
-  logs.map((user) => {
-    let row = table.insertRow();
-    let c1 = row.insertCell(0);
-    let c2 = row.insertCell(1);
-    let c3 = row.insertCell(2);
-    let c4 = row.insertCell(3);
-    c1.innerHTML = user.date;
-    let loginValue = "";
-    let logoutValue = "";
-    user.tymdata.map((tym) => {
-      loginValue = tym.login;
-      logoutValue = tym.logout;
-    });
-    c2.innerHTML = loginValue;
-    c3.innerHTML = logoutValue;
-    c4.innerHTML = "";
+  let row1 = table.insertRow();
+  let row2 = table.insertRow();
+  row1.insertCell().innerHTML = "IN";
+  row2.insertCell().innerHTML = "OUT";
+  data.map((item) => {
+    row1.insertCell().innerHTML = item.login;
+    row2.insertCell().innerHTML = item.logout;
   });
+}
+
+function populateTable() {
+  let tableBody = document.getElementById("table_body");
+  tableBody.innerHTML = "";
+  currentUser.logs.map((item) => {
+    let row = tableBody.insertRow();
+    row.onclick = handleClick;
+    row.insertCell().innerHTML = item.date;
+    row.insertCell().innerHTML = item.firstLogin;
+    row.insertCell().innerHTML = item.lastLogout;
+    row.insertCell().innerHTML = item.duration;
+    function handleClick() {
+      setDate(item.date);
+      displayTable(item.tymdata);
+    }
+  });
+  console.log(currentUser.logs);
 }
 
 //Delete Account
 function deleteAccount() {
-    var confirmation=confirm("Are really want to delete?");
-    if(confirmation){
-        allEmployees = allEmployees.filter((data) => {
-            return data.id != currentUser.id;
-         });
-         localStorage.setItem("all_employees", JSON.stringify(allEmployees));
-         window.location.href="../index.html";
+  var confirmation = confirm("Are really want to delete?");
+  if (confirmation) {
+    allEmployees = allEmployees.filter((data) => {
+      return data.id != currentUser.id;
+    });
+    localStorage.setItem("all_employees", JSON.stringify(allEmployees));
+    window.location.href = "../index.html";
+  }
+}
+
+function timeToMins(time) {
+  var b = time.split(":");
+  return b[0] * 60 + +b[1];
+}
+function timeFromMins(mins) {
+  function z(n) {
+    return (n < 10 ? "0" : "") + n;
+  }
+  var h = ((mins / 60) | 0) % 24;
+  var m = mins % 60;
+  return z(h) + ":" + z(m);
+}
+function addTimes(t0, t1) {
+  return timeFromMins(timeToMins(t0) + timeToMins(t1));
+}
+
+console.log(validateTime("15:00", "14:59"));
+function validateTime(from, to) {
+  const fromAr = from.split(":");
+  const toAr = to.split(":");
+  const diffH = parseInt(toAr[0]) - parseInt(fromAr[0]);
+  const diffM = parseInt(toAr[1]) - parseInt(fromAr[1]);
+  if (diffH >= 1) {
+    return true;
+  } else {
+    if (diffH == 0) {
+      if (diffM >= 0) {
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return false;
     }
- 
+  }
 }
 
 // function test() {
