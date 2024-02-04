@@ -1,6 +1,9 @@
 allEmployees = JSON.parse(localStorage.getItem("all_employees"));
 var currentUser = "";
 var currentUserIndex;
+var page = 1;
+var limit = 6;
+var searchKey = "";
 var urlString = window.location.href;
 var url = new URL(urlString);
 var username = url.searchParams.get("username");
@@ -14,11 +17,14 @@ document.getElementById("name").innerHTML = currentUser.name;
 document.getElementById("id").innerHTML = currentUser.id;
 document.getElementById("position").innerHTML = currentUser.position;
 const logs = currentUser.logs;
-console.log(currentUser);
 populateTable();
 
 function submitData() {
   const date = document.getElementById("date").value;
+  if (date == "") {
+    alert("Please select a date");
+    return;
+  }
   setDate(date);
   const tymObj = {};
   tymObj.login = document.getElementById("log_in").value;
@@ -48,7 +54,7 @@ function submitData() {
       logObj.firstLogin = tymObj.login;
       logObj.lastLogout = tymObj.logout;
       logObj.duration = timeDiff(logObj.firstLogin, logObj.lastLogout);
-      logs.push(logObj);
+      logs.unshift(logObj);
       displayTable(logObj.tymdata);
     }
     currentUser.logs = logs;
@@ -100,34 +106,98 @@ function displayTable(data) {
     row2.insertCell().innerHTML = item.logout;
   });
 }
-
 function populateTable() {
   let tableBody = document.getElementById("table_body");
   tableBody.innerHTML = "";
-  currentUser.logs.map((item) => {
-    let row = tableBody.insertRow();
-    row.onclick = handleClick;
-    row.insertCell().innerHTML = item.date;
-    row.insertCell().innerHTML = item.firstLogin;
-    row.insertCell().innerHTML = item.lastLogout;
-    row.insertCell().innerHTML = item.duration;
-    function handleClick() {
-      setDate(item.date);
-      displayTable(item.tymdata);
+  var filteredData = filterData(currentUser.logs);
+  filteredData.map((item, index) => {
+    if (index < limit * page && index >= limit * (page - 1)) {
+      let row = tableBody.insertRow();
+      row.onclick = handleClick;
+      row.insertCell().innerHTML = item.date;
+      row.insertCell().innerHTML = item.firstLogin;
+      row.insertCell().innerHTML = item.lastLogout;
+      row.insertCell().innerHTML = item.duration;
+      function handleClick() {
+        setDate(item.date);
+        displayTable(item.tymdata);
+      }
     }
   });
-  console.log(currentUser.logs);
+  let nextButton = document.getElementById("nextButton");
+  let prevButton = document.getElementById("prevButton");
+
+  console.log(limit, page);
+  if (filteredData.length > limit * page) {
+    console.log(filteredData.length);
+    nextButton.style.display = "block";
+  } else {
+    nextButton.style.display = "none";
+  }
+  if (page > 1) {
+    prevButton.style.display = "block";
+  } else {
+    prevButton.style.display = "none";
+  }
+}
+
+//Filter Date
+function filterData(data) {
+  if (searchKey == "") {
+    return data;
+  } else {
+    return data.filter((item) => {
+      return item.date.toLowerCase().includes(searchKey.toLowerCase());
+    });
+  }
+}
+
+// Search For Filter
+function setSearch() {
+  searchKey = document.getElementById("filter_search").value;
+  page = 1;
+  populateTable();
+}
+//Edit Details
+function editUser() {
+  event.preventDefault();
+  const userToEdit = currentUser.id;
+  var registerUrl = "./registration.html?id=" + encodeURIComponent(userToEdit);
+  console.log(registerUrl);
+  window.location.href = registerUrl;
+}
+
+//No of items in a page
+function changeLimit() {
+  limit = document.getElementById("limitSelect").value;
+  page = 1;
+  populateTable();
+}
+
+function next() {
+  page++;
+  console.log("next");
+  populateTable();
+}
+
+//Previous Page Button
+function previous() {
+  page--;
+  populateTable();
 }
 
 //Delete Account
 function deleteAccount() {
+  event.preventDefault();
   var confirmation = confirm("Are really want to delete?");
   if (confirmation) {
     allEmployees = allEmployees.filter((data) => {
       return data.id != currentUser.id;
     });
     localStorage.setItem("all_employees", JSON.stringify(allEmployees));
+    console.log("here1");
     window.location.href = "../index.html";
+    console.log("here2");
   }
 }
 
@@ -147,7 +217,6 @@ function addTimes(t0, t1) {
   return timeFromMins(timeToMins(t0) + timeToMins(t1));
 }
 
-console.log(validateTime("15:00", "14:59"));
 function validateTime(from, to) {
   const fromAr = from.split(":");
   const toAr = to.split(":");

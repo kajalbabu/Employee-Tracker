@@ -11,36 +11,28 @@
     <header>
       <h1>Employee Tracker</h1>
       <div id="topnav">
-        <a href="./registration.html">Edit Details</a>
-        <a href="./registration.html">Change Password</a>
+        <a href="" onclick="editUser()">Edit Details</a>
+        <!-- <a href="./registration.html">Change Password</a> -->
         <a href="" onclick="deleteAccount()">Delete My Account</a>
         <a href="../index.html">Logout</a>
       </div>
     </header>
     <div class="hero_partition">
       <div class="hero">
-        <div class="employee_details">
-          <div class="employee_fields">
-            <p>Name:</p>
-            <p id="name"></p>
-          </div>
-          <div class="employee_fields">
-            <p>Employee Id:</p>
-            <p id="id"></p>
-          </div>
-          <div class="employee_fields">
-            <p>Position:</p>
-            <p id="position"></p>
-          </div>
-        </div>
-        <div class="avg_details">
-          <div class="avg_fields">
-            <p>Average Hours Spend(month):</p>
-            <p id="avg_month"></p>
-          </div>
-          <div class="avg_fields">
-            <p>Average Hours Spend(6 months):</p>
-            <p id="avg_6month"></p>
+        <div class="hero_body">
+          <div class="employee_details">
+            <div class="employee_fields">
+              <p>Name:</p>
+              <p id="name"></p>
+            </div>
+            <div class="employee_fields">
+              <p>Employee Id:</p>
+              <p id="id"></p>
+            </div>
+            <div class="employee_fields">
+              <p>Position:</p>
+              <p id="position"></p>
+            </div>
           </div>
         </div>
       </div>
@@ -51,11 +43,11 @@
         <div class="time_picker">
           <div>
             Log In
-            <input type="time" id="log_in" />
+            <input type="time" id="log_in" required />
           </div>
           <div>
             Log Out
-            <input type="time" id="log_out" />
+            <input type="time" id="log_out" required />
           </div>
         </div>
         <div id="submit_button">
@@ -65,6 +57,28 @@
     </div>
     <div id="table_content">
       <h2>Employee Details</h2>
+      <div id="filter_fields">
+        <input
+          type="search"
+          value=""
+          id="filter_search"
+          onkeyup="setSearch()"
+          placeholder="Search here date..."
+        />
+        <label
+          >Rows Per Page:<select id="limitSelect" onchange="changeLimit()">
+            <option value="3">3</option>
+            <option selected="6">6</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+          </select>
+        </label>
+        <div class="page_button">
+          <button id="prevButton" onclick="previous()">Previous</button>
+          <button id="nextButton" onclick="next()">Next</button>
+        </div>
+      </div>
       <div id="table_div">
         <table id="my_table">
           <thead>
